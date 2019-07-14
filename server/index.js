@@ -1,6 +1,8 @@
-const AirportService = require("./services/airport");
+const express = require("express");
+const app = express();
+const controllers = require("./controllers");
 
-const airportService = new AirportService();
+const SERVE_PORT = process.env.PORT || 3000;
 
-const res = airportService.queryBy(45, 60, 5);
-res.then((result) => result.forEach(e => console.log(e)));
+app.listen(SERVE_PORT, () => console.log(`Server running on port ${SERVE_PORT}`));
+app.use("/api", controllers);
