@@ -1,0 +1,16 @@
+{
+  "name": "ibm-hw",
+  "version": "1.0.0",
+  "description": "Homework IBM Labs",
+  "main": "resources/js/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node resources/js/server.js"
+  },
+  "keywords": [],
+  "author": "Istvan Kiesz <istvan.kiesz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudant/cloudant": "^4.1.1"
+  }
+}
