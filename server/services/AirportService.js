@@ -1,19 +1,18 @@
 const Cloudant = require('@cloudant/cloudant');
 
-const cloudant = new Cloudant({account: 'mikerhodes', username: null, password: null});
+const cloudant = new Cloudant({ account: 'mikerhodes', username: null, password: null });
 const db = cloudant.use('airportdb');
+
+const designName = 'view1';
+const searchName = 'geo';
 
 class AirportService {
 
-  static get INDEX_DESIGN_NAME () { return 'view1'; }
-
-  static get INDEX_SEARCH_NAME () { return 'geo'; }
-
-  constructor (_db = db) {
+  constructor(_db = db) {
     this._db = _db;
   }
 
-  queryBy (long = 0, lat = 0, rad = 0) {
+  queryBy(long = 0, lat = 0, rad = 0) {
     const longNum = Number(long);
     const latNum = Number(lat);
     const radNum = Number(rad);
@@ -23,7 +22,7 @@ class AirportService {
     };
 
     return new Promise((resolve, reject) => {
-      this._db.search(AirportService.INDEX_DESIGN_NAME, AirportService.INDEX_SEARCH_NAME, q, (err, result) => {
+      this._db.search(designName, searchName, q, (err, result) => {
         if (err) {
           reject(`Error while retrieving resources: ${err.message}`);
         }
