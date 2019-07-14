@@ -43,26 +43,26 @@
                 </tr>
             </thead>
             <tbody>
-
+                <!-- results come here -->
             </tbody>
         </table>
         <ul></ul>
     </div>
 
     <script>
-        document.querySelector(".form.airport .button.get").addEventListener("click", function () {
+        document.querySelector(".form.airport .button.get").addEventListener("click", () => {
           const lat = document.querySelector("[name='lat']").value;
           const long = document.querySelector("[name='long']").value;
           const rad = document.querySelector("[name='rad']").value;
           const fetchUri = "/api/airports?long=" + long + "&lat=" + lat + "&rad=" + rad;
 
           fetch(fetchUri)
-            .then(function(response) {
+            .then((response) => {
               return response.json();
             })
-            .then(function(response) {
+            .then((response) => {
               return response
-                .map(function(e) {
+                .map((e) => {
                     return {
                       ...e,
                       distance: Math.sqrt(Math.pow(Math.abs(e.lat - lat), 2) + Math.pow(Math.abs(long - e.long), 2))
@@ -78,12 +78,12 @@
                   return 0;
                 });
             })
-            .then(function(response) {
+            .then((response) => {
               const total = document.querySelector(".results-total");
               total.textContent = "Total: " + response.length;
               const table = document.querySelector(".results-table > tbody");
               table.innerHTML = "";
-              response.forEach(function(e, i) {
+              response.forEach((e, i) => {
                 const idx = document.createElement("td");
                 idx.textContent = i + 1;
                 const name = document.createElement("td");
@@ -99,7 +99,7 @@
                 table.appendChild(row);
               });
             })
-            .catch(function(err) {
+            .catch((err) => {
               console.log(err);
             });
         });
