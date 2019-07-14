@@ -2,10 +2,16 @@
   "name": "ibm-hw",
   "version": "1.0.0",
   "description": "Homework IBM Labs",
-  "main": "server/index.js",
   "scripts": {
     "test": "jasmine",
     "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kieszistvan/ibm-hw.git"
+  },
+  "engines": {
+    "node": ">=12.6.0"
   },
   "keywords": [],
   "author": "Istvan Kiesz <istvan.kiesz@gmail.com>",
