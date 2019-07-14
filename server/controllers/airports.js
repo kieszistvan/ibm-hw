@@ -4,9 +4,11 @@ const router = express.Router();
 
 const airportService = new AirportService();
 
-router.get("/", (request, response) => {
-  const res = airportService.queryBy(45, 60, 5);
-  res.then((result) => response.send(result));
+router.get("/airports", (request, response, next) => {
+  const res = airportService.queryBy(request.query.long, request.query.lat, request.query.rad);
+  res
+    .then((result) => response.send(result))
+    .catch((err) => next(err));
 });
 
 module.exports = router;

@@ -12,8 +12,14 @@ class AirportService {
     this._db = _db;
   }
 
-  queryBy(long, lat, rad) {
-    const q = { q: `lon:[${long} TO ${long+rad}] AND lat:[${lat} TO ${lat+rad}]` };
+  queryBy(long, lat, rad = 0) {
+    const longNum = Number(long);
+    const latNum = Number(lat);
+    const radNum = Number(rad);
+
+    const q = {
+      q: `lon:[${longNum - radNum} TO ${longNum + radNum}] AND lat:[${latNum - radNum} TO ${latNum + radNum}]`
+    };
     console.log(`Looking up airport database using query "${q.q}"`);
 
     return new Promise((resolve, reject) => {
@@ -21,10 +27,11 @@ class AirportService {
         if (err) {
           reject(`Error while retrieving resources: ${err.message}`);
         }
+        console.log(`Found ${result.total_rows} airports`);
         resolve(result.rows.map(row => ({
-          id: row.id,
           long: row.fields.lon,
-          lat: row.fields.lat
+          lat: row.fields.lat,
+          name: row.fields.name
         })));
       })
     })
