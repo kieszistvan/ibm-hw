@@ -50,6 +50,10 @@
     </div>
 
     <script>
+        const calculateDistance = (originX, airportX, originY, airportY) => {
+          return Math.sqrt(Math.pow(Math.abs(airportX - originX), 2) + Math.pow(Math.abs(originY - airportY), 2));
+        };
+
         document.querySelector(".form.airport .button.get").addEventListener("click", () => {
           const lat = document.querySelector("[name='lat']").value;
           const long = document.querySelector("[name='long']").value;
@@ -65,7 +69,7 @@
                 .map((e) => {
                     return {
                       ...e,
-                      distance: Math.sqrt(Math.pow(Math.abs(e.lat - lat), 2) + Math.pow(Math.abs(long - e.long), 2))
+                      distance: calculateDistance(long, e.long, lat, e.lat)
                     }
                 })
                 .sort((e1, e2) => {
